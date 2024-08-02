@@ -1,0 +1,35 @@
+<h1>Đây là cửa hàng thú cưng</h1>
+
+<div id="container">
+  <div id="product-container">
+    @for (product of products; track $index) {
+    <div id="product-card">
+      <h2>{{ product.name }}</h2>
+      <img [src]="product.imgURL" />
+      <h2>{{ product.price }} VND</h2>
+      <h2>{{ product.inStock }}</h2>
+      <button
+        [disabled]="product.inStock == 0 ? true : false"
+        (click)="addToCart($index)"
+      >
+        Thêm vào giỏ
+      </button>
+    </div>
+    }
+  </div>
+</div>
+
+<div id="cart-container">
+  @for (product of cart; track $index) {
+  <div id="product-in-cart">
+    <p class>{{ product.name }}</p>
+    <p>{{ product.price }} VND</p>
+    <p>{{ product.quantity }}</p>
+    <button (click)="deleteProduct($index)">Delete</button>
+  </div>
+  }
+</div>
+
+<div class="totalCart">
+  <h2>Tổng tiền phải thanh toán là: {{ totalCart() }} VND</h2>
+</div>
